@@ -42,7 +42,6 @@ from django.conf import settings
 from django.utils.cache import add_never_cache_headers, patch_response_headers
 from six.moves import zip
 
-
 try:
     from PIL import Image
 except ImportError:
@@ -191,6 +190,7 @@ def renderViewGraph(graphOptions, requestOptions, data):
         content_type='text/javascript')
 
     return buildResponse(image, 'image/svg+xml')
+  
   if (graphOptions['outputFormat'] == 'webp') and Image:
     output = BytesIO()
     pil_img = Image.open(BytesIO(image))
@@ -411,9 +411,6 @@ def parseOptions(request):
     requestOptions['noNullPoints'] = True
   if 'maxStep' in queryParams and queryParams['maxStep'].isdigit():
     requestOptions['maxStep'] = int(queryParams['maxStep'])
-  # if 'quality' in queryParams and queryParams['quality'].isdigit():
-  #   requestOptions['quality'] = int(queryParams['quality'])
-  
 
   requestOptions['localOnly'] = queryParams.get('local') == '1'
 
