@@ -579,7 +579,7 @@ class Graph:
 
   def setupCairo(self,outputFormat='png'):
     self.outputFormat = outputFormat
-    if outputFormat == 'png':
+    if outputFormat in ('png', 'webp') :
       self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.width, self.height)
     elif outputFormat == 'svg':
       self.surfaceData = BytesIO()
@@ -842,7 +842,7 @@ class Graph:
     }
 
   def output(self, fileObj):
-    if self.outputFormat == 'png':
+    if self.outputFormat in ('png', 'webp'):
       self.surface.write_to_png(fileObj)
     elif self.outputFormat == 'pdf':
       self.surface.finish()
